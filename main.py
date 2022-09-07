@@ -82,7 +82,7 @@ print(week)
 wm = WeChatMessage(client)
 wea, temperature ,low_temp ,high_temp= get_weather()
 
-wathch_out = ""
+watch_out = ""
 
 day,curday = watch_out_yima()
 
