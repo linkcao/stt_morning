@@ -21,12 +21,13 @@ template_id = os.environ["TEMPLATE_ID"]
 # app_secret = "d9c1d57da6cfab23f24645d5d8eda963"
 
 # user_id = "o_Umd6Vux-Pz6dQRfP5G1D6kycYE"
-# template_id = "PTRE1OhKxncrSs_N6NNQ43JnkI6oMgLpoB0H14GzE78"
+# template_id = "uFD__3huhMoZn0XKCn7gLDrMtxpjzhQMYteaWEEa4Ys"
 
-# city = "临海"
+city = "临海"
 
-# birthday = "8-5"
-# start_date = "2022-6-7"
+birthday = "8-5"
+start_date = "2022-6-7"
+yimaday = 16
 
 yama_watch = ""
 year = date.today().year
@@ -36,9 +37,25 @@ else:
   calendar={1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
 
 def watch_out_yima():
-  left_day = calendar[date.today().month] - date.today().day
-  cur_day = date.today().day
-  return left_day,cur_day
+  cur_day = int(date.today().day)
+#   cur_day = 28
+  cur_month = int(date.today().month)
+  left_day = 0
+  pass_day = 0
+  if cur_day <= yimaday:
+    left_day = yimaday - cur_day
+    if cur_day < yimaday:
+        pass_day = cur_day
+        pass_day += calendar[cur_month] - yimaday
+    else:
+        pass_day = 0
+  else:
+    left_day = calendar[cur_month] - cur_day
+    left_day += yimaday
+    pass_day = cur_day - yimaday
+  # 计算距离来了多久
+  
+  return left_day,pass_day
 
 def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
@@ -68,6 +85,7 @@ def get_words():
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
+    
 # def get_yima_day():
 print(app_id)
 print(app_secret)
@@ -84,16 +102,16 @@ wea, temperature ,low_temp ,high_temp= get_weather()
 
 watch_out = ""
 
-day,curday = watch_out_yima()
+left_day,pass_day = watch_out_yima()
 
 yama_watch
-if(curday <= 5 or day <= 2):
+if(pass_day <= 5):
   watch_out = "姨妈期间记得注意休息呀，别吃冷的辣的，清淡饮食，注意保暖，不舒服了随时滴滴鸭鸭奥，给你去泡红糖水，按摩按摩，爱你~"
-elif(day <= 7):
-  yama_watch = "距离大姨妈拜访大概还有" + str(day+1) + "天" 
+elif(left_day <= 7):
+  yama_watch = "距离大姨妈拜访大概还有" + str(left_day) + "天" 
   watch_out = "快来大姨妈啦，记得别吃冷的辣的，要注意休息，来了滴我一声，我马上给你去泡红糖水，想吃啥喝啥，随时callback，爱你~"
 else:
-  yama_watch = "距离大姨妈拜访大概还有" + str(day+1) + "天" 
+  yama_watch = "距离大姨妈拜访大概还有" + str(left_day) + "天" 
 
 print(high_temp)
 data = {
@@ -103,4 +121,3 @@ data = {
 
 res = wm.send_template(user_id, template_id, data)
 print(res)
-
