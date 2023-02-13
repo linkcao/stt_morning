@@ -58,12 +58,12 @@ def watch_out_yima():
   return left_day,pass_day
 
 def get_weather():
-  url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
+  url = "https://api.seniverse.com/v3/weather/daily.json?key=SwKq-NNswcqE7bV2C&location=hangzhou&language=zh-Hans&unit=c&start=-1&days=5"
   res = requests.get(url).json()
-  weather = res['data']['list'][0]
+  weather = res['results'][0]['daily'][0]['text_day'] + '-' + res['results'][0]['daily'][0]['text_night']
   print(weather)
-  low_temp = weather['low']
-  high_temp = weather['high']
+  low_temp = res['results'][0]['daily'][0]['low']
+  high_temp = res['results'][0]['daily'][0]['high']
   return weather['weather'], math.floor(weather['temp']), low_temp, high_temp
 
 def get_count():
