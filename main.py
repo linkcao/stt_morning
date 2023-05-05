@@ -94,8 +94,8 @@ client = WeChatClient(app_id, app_secret)
 
 
 week_list = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
-week = week_list[date.today().weekday()]
-print(week)
+myweek = week_list[date.today().weekday()]
+print(myweek)
 
 wm = WeChatMessage(client)
 wea, temperature ,low_temp ,high_temp= get_weather()
@@ -115,9 +115,9 @@ else:
 
 print(high_temp)
 data = {
-  "week":{"value": week },"weather":{"value":wea},"low_temp":{"value": int(low_temp) },"high_temp": {"value": int(high_temp)},"temperature":{"value":temperature},"love_days":{"value":get_count()+1},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()},
+  "myweek":{"value": myweek },"weather":{"value":wea},"low_temp":{"value": int(low_temp) },"high_temp": {"value": int(high_temp)},"temperature":{"value":temperature},"love_days":{"value":get_count()+1},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()},
   "words_yima":{"value":watch_out , "color":get_random_color()}, "yima_dely": {"value": yama_watch}}
 # data = {"weather":{"value":wea}}
-
+print(data)
 res = wm.send_template(user_id, template_id, data)
 print(res)
