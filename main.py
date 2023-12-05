@@ -17,12 +17,6 @@ app_secret = os.environ["APP_SECRET"]
 user_id = os.environ["USER_ID"]
 template_id = os.environ["TEMPLATE_ID"]
 
-# app_id = "wxda714829c5c006df"
-# app_secret = "d9c1d57da6cfab23f24645d5d8eda963"
-
-# user_id = "o_Umd6Vux-Pz6dQRfP5G1D6kycYE"
-# template_id = "uFD__3huhMoZn0XKCn7gLDrMtxpjzhQMYteaWEEa4Ys"
-
 city = "临海"
 
 birthday = "8-5"
