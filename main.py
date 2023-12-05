@@ -58,8 +58,9 @@ def watch_out_yima():
   return left_day,pass_day
 
 def get_weather():
+  headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',"Content-Type": "application/json"}
   url = "https://api.seniverse.com/v3/weather/daily.json?key=SwKq-NNswcqE7bV2C&location=hangzhou&language=zh-Hans&unit=c&start=-1&days=5"
-  res = requests.get(url).json()
+  res = requests.get(url, headers=headers).json()
   weather = res['results'][0]['daily'][0]['text_day'] + '-' + res['results'][0]['daily'][0]['text_night']
   print(weather)
   low_temp = res['results'][0]['daily'][0]['low']
